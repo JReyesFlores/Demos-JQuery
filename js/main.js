@@ -76,4 +76,25 @@ $(document).ready(function () {
       //timeout: 10000,
     });
   });
+
+  $('#leerServicioWeb2').on('click', function () {
+    var misdatosprod = [];
+    $.ajax({
+      url: SERVICE,
+      type: 'GET',
+      data: {},
+      success: function (response) {
+        console.log(response);
+        misdatosprod = response;
+      },
+      complete: function (xq) {
+        var cadena = '';
+        misdatosprod.forEach(function (item) {
+          cadena += `<option>${item.title}</option>`;
+        });
+        console.log(cadena);
+        $('#listaProductos').html(cadena);
+      },
+    });
+  });
 });
