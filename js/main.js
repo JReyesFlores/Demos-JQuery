@@ -1,5 +1,27 @@
 $(document).ready(function () {
   const SERVICE = 'https://fakestoreapi.com/products';
+  var cboListaProducto = $('#listaProductos')[0];
+
+  if (cboListaProducto) { 
+    var misdatosprod = [];
+    $.ajax({
+      url: SERVICE,
+      type: 'GET',
+      data: {},
+      success: function (response) {
+        console.log(response);
+        misdatosprod = response;
+      },
+      complete: function (xqHR) {
+        var cadena = '';
+        misdatosprod.forEach(function (item) {
+          cadena += `<option>${item.title}</option>`;
+        });
+        console.log(cadena);
+        $('#listaProductos').html(cadena);
+      },
+    });
+  }
 
   $('#leer').click(function (e) {
     e.preventDefault();
@@ -87,7 +109,7 @@ $(document).ready(function () {
         console.log(response);
         misdatosprod = response;
       },
-      complete: function (xq) {
+      complete: function (xqHR) {
         var cadena = '';
         misdatosprod.forEach(function (item) {
           cadena += `<option>${item.title}</option>`;
